@@ -1,4 +1,3 @@
-
 public class Event {
 
     private String eventId;
@@ -56,8 +55,13 @@ public class Event {
         return status;
     }
 
-    public void setstatus (String status) {
+    public void setStatus (String status) {
         this.status = status;
     }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
 
 }
