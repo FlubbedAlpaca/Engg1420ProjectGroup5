@@ -1,16 +1,16 @@
 public class Concert extends Event {
-    private String features;
+    private String AgeRestriction;
 
-    public Concert (String eventId, String title, String dateTime, String location, int capacity, String features) {
+    public Concert (String eventId, String title, String dateTime, String location, int capacity, String AgeRestriction) {
         super(eventId, title, dateTime, location, capacity);
-        this.features = features;
+        this.AgeRestriction = AgeRestriction;
     }
 
-    public String getFeatures() {
-        return features;
+    public String getAgeRestriction() {
+        return AgeRestriction;
     }
 
-    public void setFeatures(String features) {
-        this.features = features;
+    public void setAgeRestriction(String AgeRestriction) {
+        this.AgeRestriction = AgeRestriction;
     }
 }

@@ -10,7 +10,7 @@ public class Seminar extends Event {
         return SpeakerName;
     }
 
-    public void setSpeakerName(String Speaker) {
+    public void setSpeakerName(String SpeakerName) {
         this.SpeakerName = SpeakerName;
     }
 }
