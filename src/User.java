@@ -1,4 +1,4 @@
-public class User {
+public abstract class User {
         private String name;
         private String userID;
         private String email;
@@ -18,5 +18,7 @@ public class User {
         public String getemail(){
             return email;
         }
-    }
+
+    public abstract int getLimit();
+}
 
