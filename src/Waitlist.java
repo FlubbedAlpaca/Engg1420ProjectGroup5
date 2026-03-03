@@ -49,5 +49,18 @@ public class Waitlist {
         return rows;
     }
 
+    public boolean removeWaitlistBooking(String waitlistBookingId) {
+       for (int i = 0; i < waitlistEntries.size(); i++) {
+           WaitlistEntry e = waitlistEntries.get(i);
+
+           if (e.waitlistBookingId.equals(waitlistBookingId)) {
+               e.booking.status = "CANCELLED";
+               waitlistEntries.remove(i);
+               return true;
+           }
+       }
+       return false;
+    }
+
 }
 
