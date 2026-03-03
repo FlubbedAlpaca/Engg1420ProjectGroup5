@@ -12,7 +12,7 @@ public abstract class User {
         public String getname(){
             return name;
         }
-        public String getUserID(){
+        public String getUserId(){
             return userID;
         }
         public String getemail(){
@@ -38,6 +38,5 @@ public abstract class User {
         }
 
         public abstract String getType();
-
 }
 

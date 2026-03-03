@@ -1,30 +1,36 @@
 public class UserFunctions {
+    userStorage storage = new userStorage();
     public User createUser(String userId, String name, String email, String type){
-        //if(user exists){
-        //throw error: "UserId already exists: " + userId);
-        //}
+        if(storage.exists(userId)){
+            System.out.println("User Id already exists");
+        }
         User user;
         switch (type) {
             case "STUDENT": user = new Student(userId, name, email); break;
             case "STAFF": user = new Staff(userId, name, email); break;
             case "GUEST": user = new Guest(userId, name, email); break;
             default: {
-                //throw error "Invalid user type"
+                user = null;
+                System.out.println("Invalid User Type");
+                break;
             }
         }
-        //add user to database
+        storage.add(user);
         return user;
     }
 
     public User viewUser(String userId){
-        //get user based on id
-        if(user == null){
-            //throw error "No user with id: " + userId
+        User user;
+        if(!storage.exists(userId)){
+            System.out.println("No user with ID: " + userId);
+            user = null;
+        }else{
+            user = storage.get(userId);
         }
         return user;
     }
 
-    public listAllUsers(){
-        //return all users
+    public User[] listAllUsers(){
+        return storage.getAll();
     }
 }
