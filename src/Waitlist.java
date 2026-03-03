@@ -29,6 +29,25 @@ public class Waitlist {
         this.promotionListener = Listener;
     }
 
+    public List<String> viewEventWaitlist (String eventId) {
+        List<WaitlistEntry> list = getWaitlistForEventOrdered(eventId);
+
+        List<String> rows = new ArrayList<>();
+        rows.add("=== WAITLIST FOR EVENT: " + eventId + "===");
+        rows.add("Pos | WaitlistBookingId | Timestamp       | UserID     | Name     | Email");
+
+        if (list.isEmpty()) {
+            rows.add("(There are no waitlisted bookings for this event.)");
+            return rows;
+        }
+        int pos = 1;
+        for (WaitlistEntry e : list) {
+            String line = String.format("%-3d | %-16s | %-19s | %-10s | %-14s| %s", pos, shortId(e.waitlistBookingId), e.timestamp, e.user.getUserID(), e.user.getname(), e.user.getemail());
+            rows.add(line);
+            pos++;
+        }
+        return rows;
+    }
 
 }
 
