@@ -33,7 +33,7 @@ public class WaitlistManager {
         ArrayList<User> waitlist = allWaitlists.get(index);
         if (waitlist.size() > 0) {
             return true;
-        } else if{
+        } else{
             return false;
         }
     }
