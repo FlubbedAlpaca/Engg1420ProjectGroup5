@@ -7,6 +7,11 @@ public class Staff extends User {
     public int getLimit() {
         return 5;
     }
+
+    @Override
+    public String getType(){
+        return "STAFF";
+    }
 }
 
 

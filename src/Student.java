@@ -8,5 +8,10 @@ public class Student extends User {
     public int getLimit(){
         return 3;
     }
+
+    @Override
+    public String getType(){
+        return "STUDENT";
+    }
 }
 
