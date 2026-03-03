@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <VBox prefHeight="400.0" prefWidth="149.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="170.0" text="USER MANAGEMENT" />
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="196.0" text="EVENT MANAGMENT" />
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="179.0" text="BOOKING MANAFMENT" />
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="201.0" text="WAITLIST MANAGMENT" />
+            <TextField />
+            <TextField />
+            <TextField />
+            <ComboBox prefHeight="0.0" prefWidth="165.0" />
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="219.0" text="SUMBIT/ADD" />
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+              <columns>
+                <TableColumn prefWidth="75.0" text="USER ID" />
+                <TableColumn prefWidth="116.4285659790039" text="NAME" />
+                  <TableColumn prefWidth="104.14288330078125" text="EMAIL" />
+                  <TableColumn prefWidth="154.14285278320312" text="USER TYPE" />
+              </columns>
+            </TableView>
+            <TableView prefHeight="212.0" prefWidth="451.0" VBox.vgrow="ALWAYS">
+              <columns>
+                <TableColumn prefWidth="75.0" text="EVENT ID" />
+                <TableColumn prefWidth="75.0" text="TITLE" />
+                  <TableColumn prefWidth="75.0" text="DATE/TIME" />
+                  <TableColumn prefWidth="75.0" text="CAPACITY" />
+                  <TableColumn prefWidth="75.0" text="STATUS" />
+                  <TableColumn prefWidth="75.0" text="EVENT TYPE" />
+              </columns>
+            </TableView>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

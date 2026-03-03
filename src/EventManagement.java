@@ -3,9 +3,36 @@ import java.util.ArrayList;
 public class EventManagement {
 
     private ArrayList<Event> events;
+    private BookingManager bookingManager;
+    private WaitlistManager waitlistManager;
 
     public EventManagement() {
         this.events = new ArrayList<>();
+        this.bookingManager = null;
+        this.waitlistManager = null;
+    }
+
+    public void setBookingManager(BookingManager bm) {
+        this.bookingManager = bm;
+    }
+
+    public void setWaitlistManager(WaitlistManager wm) {
+        this.waitlistManager = wm;
+    }
+
+    public Event getEvent(String eventId) {
+        Event found = null;
+        for (int i = 0; i < events.size(); i++) {
+            Event e = events.get(i);
+            if (e.getEventId().equals(eventId)) {
+                found = e;
+            }
+        }
+        return found;
+    }
+
+    public ArrayList<Event> getEvents() {
+        return events;
     }
 
     public void createEvent(Event newEvent) {
@@ -49,6 +76,14 @@ public class EventManagement {
         for (Event e : events) {
             if (e.getEventId().equals(eventId)) {
                 e.setStatus("Cancelled");
+
+                if (bookingManager != null) {
+                    bookingManager.cancelAllBookingsForEvent(eventId);
+                }
+                if (waitlistManager != null) {
+                    waitlistManager.clearWaitlist(eventId);
+                }
+
                 System.out.println("Success: Event " + eventId + " has been cancelled.");
 
                 return;
