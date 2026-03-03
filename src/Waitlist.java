@@ -94,7 +94,20 @@ public class Waitlist {
         return entry.waitlistBookingId;
     }
 
+    private List<WaitlistEntry> getWaitlistForEvenOrdered(String eventId) {
+        ArrayList<WaitlistEntry> list = new ArrayList<>();
+        for (WaitlistEntry e : waitlistEntries) {
+            if (e.eventId.equals(eventId) && "WAITLISTED".equalsIgnoreCase(e.booking.status)) {
+                list.add(e);
+            }
+        }
+        list.sort(Comparator.comparing(e-> e.timestamp));
+        return list;
+    }
 
+    private static String shortId(String id) {
+        return (id.length() <=8) ? id : id.substring(0, 8);
+    }
 
 }
 
