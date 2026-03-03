@@ -1,8 +1,11 @@
 import java.util.ArrayList;
 
 public class UserFunctions {
-    userStorage storage = new userStorage();
+    private userStorage storage;
 
+    public UserFunctions() {
+        this.storage = new userStorage();
+    }
     public User createUser(String userId, String name, String email, String type){
         if(storage.exists(userId)){
             System.out.println("Error: User with ID " + userId + " already exists.");
