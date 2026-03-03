@@ -1,33 +1,25 @@
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+
 public class Booking {
-    private String bookingId;
-    private User user;
-    private Event event;
-    public String status;
+    public String bookingStatus;
+    private int bookingID;
+    private static int numBookings = 0;
+    private String createdAt;
+    private String userID;
+    private String eventID;
+    public Booking(User user, Event event){
+        if (event.getCapacity() >= 1){
+            bookingStatus = "Confirmed";
 
-    public Booking(String bookingId, User user, Event event, String status) {
-        this.bookingId = bookingId;
-        this.user = user;
-        this.event = event;
-        this.status = status;
-    }
+            bookingID = numBookings + 1;
+            numBookings++;
 
-    public String getBookingId() {
-        return bookingId;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public Event getEvent() {
-        return event;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+            userID = user.getUserID();
+            eventID = event.getEventId();
+            LocalDateTime current_date = LocalDateTime.now();
+            DateTimeFormatter date_format = DateTimeFormatter.ofPattern("dd-MM-yyy HH:mm");
+            createdAt = current_date.format(date_format);
+        }
     }
 }
