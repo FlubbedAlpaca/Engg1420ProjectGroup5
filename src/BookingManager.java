@@ -35,23 +35,23 @@ public class BookingManager {
             waitlistManager.addToWaitlist(event.getEventId(), user);
 
             String bookingId = "B" + String.format("%03d", bookingCounter++);
-            Booking booking = new Booking(bookingId, user, event, "Waitlisted");
+            Booking booking = new Booking(user, event);
             bookings.add(booking);
             return;
         }
 
         String bookingId = "B" + String.format("%03d", bookingCounter++);
-        Booking booking = new Booking(bookingId, user, event, "Confirmed");
+        Booking booking = new Booking(user, event);
         bookings.add(booking);
         System.out.println("Success: Booking " + bookingId + " confirmed for '" + user.getname() +
                          "' at event '" + event.getTitle() + "'.");
     }
 
-    public void cancelBooking(String bookingId) {
+    public void cancelBooking(int bookingId) {
         Booking bookingToCancel = null;
 
         for (Booking b : bookings) {
-            if (b.getBookingId().equals(bookingId)) {
+            if (b.getBookingId() == (bookingId)) {
                 bookingToCancel = b;
                 break;
             }
