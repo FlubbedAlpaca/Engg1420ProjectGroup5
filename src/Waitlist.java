@@ -21,5 +21,14 @@ public class Waitlist {
         }
     }
 
+    private final ArrayList<WaitlistEntry> waitlistEntries = new ArrayList<>();
+
+    private PromotionListener promotionListener;
+
+    public void setPromotionListener (PromotionListener listener) {
+        this.promotionListener = Listener;
+    }
+
+
 }
 
