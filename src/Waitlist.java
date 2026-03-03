@@ -109,5 +109,27 @@ public class Waitlist {
         return (id.length() <=8) ? id : id.substring(0, 8);
     }
 
+    public interface PromotionListener {
+        void onPromotion(PromotionNotification notification);
+    }
+
+    public static class PromotionNotification {
+        public final String eventId;
+        public final String eventTitle;
+        public final String promotedUserId;
+        public final String promotedUserName;
+
+        public PromotionNotification(String eventId, String eventTitle, String promotedUserId, String promotedUserName) {
+            this.eventId = eventId;
+            this.eventTitle = eventTitle;
+            this.promotedUserId = promotedUserId;
+            this.promotedUserName = promotedUserName;
+        }
+
+        @Override
+        public String toString() {
+            return "PROMOTION: " + promotedUserName + " (UserID=" + promotedUserId + ") has been promoted to CONFIRMED FOR EVENT " + eventTitle + " (EventID=" + eventId + ")";
+        }
+    }
 }
 
