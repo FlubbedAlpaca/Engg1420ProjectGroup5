@@ -83,6 +83,18 @@ public class Waitlist {
         return note;
     }
 
+    public String addToWaitlist(String eventId, User user, Booking booking) {
+        booking.status = "WAITLISTED";
+
+        WaitlistEntry entry = new waitlistEntry(eventId, user, booking);
+        waitlistEntries.add(entry);
+
+        waitlistEntries.sort(Comparator.comparing(e -> e.timestamp));
+
+        return entry.waitlistBookingId;
+    }
+
+
 
 }
 
