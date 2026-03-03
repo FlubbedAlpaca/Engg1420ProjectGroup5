@@ -62,5 +62,27 @@ public class Waitlist {
        return false;
     }
 
+    public PromotionNotification promoteNextFromWaitlist(Event event) {
+        String eventId = event.getEventId();
+
+        List<WaitlistEntry> list = getWaitlistForEventOrdered(eventId);
+        if (list.isEmpty()) return null;
+
+        WaitlistEntry promoted = list.get(0);
+
+        promoted.booking.status = "CONFIRMED";
+        waitlistEntries.remove(promoted);
+
+        PromotionNotification note = new PromotionNotification (
+                event.getEventId(), event.getTitle(), promoted.user.getUserID(), promoted.user.getname()
+        );
+
+        if (promotionListener != null) {
+            promotionListener.onPromotion(note);
+        }
+        return note;
+    }
+
+
 }
 
