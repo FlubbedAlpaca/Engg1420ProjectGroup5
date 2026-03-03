@@ -12,13 +12,31 @@ public abstract class User {
         public String getname(){
             return name;
         }
-        public String getUserID(){
+        public String getUserId(){
             return userID;
         }
         public String getemail(){
             return email;
         }
 
-    public abstract int getLimit();
+        public abstract int getLimit();
+
+        public void setName(String name){
+            if(name == null){
+                System.out.println("Name Required");
+            }else{
+                this.name = name;
+            }
+        }
+
+        public void setEmail(String email){
+            if(name == null){
+                System.out.println("Email Required");
+            }else{
+                this.email = email;
+            }
+        }
+
+        public abstract String getType();
 }
 
