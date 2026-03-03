@@ -3,16 +3,25 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
    <left>
-      <VBox prefHeight="329.0" prefWidth="155.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="400.0" prefWidth="149.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="USER MANAGEMENT " />
-            <Button mnemonicParsing="false" text="  EVENT MANAGMENT    " />
-            <Button mnemonicParsing="false" text="BOOKING MANAFMENT " />
-            <Button mnemonicParsing="false" text="WAITLIST MANAGMENT " />
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="170.0" text="USER MANAGEMENT" />
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="196.0" text="EVENT MANAGMENT" />
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="179.0" text="BOOKING MANAFMENT" />
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="201.0" text="WAITLIST MANAGMENT" />
          </children>
       </VBox>
    </left>
+   <center>
+      <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn prefWidth="75.0" text="USER ID" />
+          <TableColumn prefWidth="116.4285659790039" text="NAME" />
+            <TableColumn prefWidth="104.14288330078125" text="EMAIL" />
+            <TableColumn prefWidth="154.14285278320312" text="USER TYPE" />
+        </columns>
+      </TableView>
+   </center>
 </BorderPane>
