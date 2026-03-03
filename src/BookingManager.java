@@ -146,4 +146,15 @@ public class BookingManager {
             System.out.println("No bookings found.");
         }
     }
+
+    public void cancelAllBookingsForEvent(String eventId) {
+        for (Booking b : bookings) {
+            if (b.getEvent().getEventId().equals(eventId)) {
+                if (!b.getStatus().equals("Cancelled")) {
+                    b.setStatus("Cancelled");
+                }
+            }
+        }
+        System.out.println("All bookings for event " + eventId + " have been cancelled.");
+    }
 }

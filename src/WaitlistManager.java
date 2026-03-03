@@ -31,10 +31,44 @@ public class WaitlistManager {
             return false;
         }
         ArrayList<User> waitlist = allWaitlists.get(index);
-        if (waitlist.size() > 0) {
-            return true;
-        } else{
-            return false;
+        return !waitlist.isEmpty();
+    }
+
+    public User promoteFirstFromWaitlist(String eventId) {
+        int index = eventIDlist.indexOf(eventId);
+        if (index == -1) {
+            return null;
+        }
+        ArrayList<User> waitlist = allWaitlists.get(index);
+        if (waitlist.isEmpty()) {
+            return null;
+        }
+        return waitlist.remove(0);
+    }
+
+    public void clearWaitlist(String eventId) {
+        int index = eventIDlist.indexOf(eventId);
+        if (index != -1) {
+            allWaitlists.get(index).clear();
+        }
+    }
+
+    public void viewWaitlist(String eventId) {
+        int index = eventIDlist.indexOf(eventId);
+        if (index == -1) {
+            System.out.println("No waitlist for event " + eventId);
+            return;
+        }
+        ArrayList<User> waitlist = allWaitlists.get(index);
+        if (waitlist.isEmpty()) {
+            System.out.println("Waitlist is empty for event " + eventId);
+            return;
+        }
+        System.out.println("--- Waitlist for Event " + eventId + " ---");
+        int position = 1;
+        for (User u : waitlist) {
+            System.out.println(position + ". " + u.getname() + " (" + u.getUserID() + ")");
+            position++;
         }
     }
 }
