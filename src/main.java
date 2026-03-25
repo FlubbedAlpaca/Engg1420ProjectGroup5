@@ -3,7 +3,15 @@ import java.util.Scanner;
 
 public class main {
     private static Scanner scanner;
+    private static EventManagement eventManagement;
+    private static BookingManager bookingManager;
+    private static UserFunctions userFunctions;
+    private static WaitlistManager waitlistManager;
     public static void main(String[] args){
+        waitlistManager = new WaitlistManager();
+        bookingManager = new BookingManager(waitlistManager);
+        eventManagement = new EventManagement();
+        userFunctions = new UserFunctions();
         scanner = new Scanner(System.in);
         boolean finished = false;
 
@@ -143,6 +151,9 @@ public class main {
                 case 5:
                     //Save info
                     finished = true;
+                    FileManager.saveUsers(userFunctions.getUsers());
+                    FileManager.saveEvents(eventManagement.getEvents());
+                    FileManager.saveBookings(bookingManager.getBookings());
                     System.out.println("Data Saved. See you next time.");
                     break;
                 default:
