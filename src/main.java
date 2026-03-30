@@ -13,6 +13,9 @@ public class main {
         eventManagement = new EventManagement();
         userFunctions = new UserFunctions();
         scanner = new Scanner(System.in);
+        FileManager.loadUsers(userFunctions);
+        FileManager.loadEvents(eventManagement);
+        FileManager.loadBookings(bookingManager, userFunctions, eventManagement);
         boolean finished = false;
 
         System.out.println("Campus Event System");
@@ -39,13 +42,13 @@ public class main {
                         choice = Integer.parseInt(scanner.nextLine());
                         switch(choice){
                             case 1:
-                                //addUser
+                                MainManager.addUser();
                                 break;
                             case 2:
-                                //viewUser
+                                MainManager.viewUser();
                                 break;
                             case 3:
-                                //listallUsers
+                                MainManager.listAllUsers();
                                 break;
                             case 4:
                                 back = true;
@@ -71,19 +74,19 @@ public class main {
 
                         switch(choice){
                             case 1:
-                                //createEvent
+                                MainManager.createEvent();
                                 break;
                             case 2:
-                                //updateEvent
+                                MainManager.updateEvent();
                                 break;
                             case 3:
-                                //cancelEvent
+                                MainManager.cancelEvent();
                                 break;
                             case 4:
-                                //listEvent
+                                MainManager.listEvent();
                                 break;
                             case 5:
-                                //searchEvent
+                                MainManager.searchEvent();
                                 break;
                             case 6:
                                 back = true;
@@ -108,16 +111,16 @@ public class main {
                         choice = Integer.parseInt(scanner.nextLine());
                         switch (choice) {
                             case 1:
-                                //createBooking
+                                MainManager.createBooking();
                                 break;
                             case 2:
-                                //cancelBooking
+                                MainManager.cancelBooking();
                                 break;
                             case 3:
-                                //viewUserBookings
+                                MainManager.viewUserBookings();
                                 break;
                             case 4:
-                                //listAllBookings
+                                MainManager.listAllBookings();
                                 break;
                             case 5:
                                 back = true;
@@ -137,7 +140,7 @@ public class main {
                         choice = Integer.parseInt(scanner.nextLine());
                         switch(choice){
                             case 1:
-                                //viewWailtList
+                                MainManager.viewWailtList();
                                 break;
                             case 2:
                                 back = true;
@@ -149,7 +152,6 @@ public class main {
                     }
                     break;
                 case 5:
-                    //Save info
                     finished = true;
                     FileManager.saveUsers(userFunctions.getUsers());
                     FileManager.saveEvents(eventManagement.getEvents());
