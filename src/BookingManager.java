@@ -46,7 +46,7 @@ public class BookingManager {
     }
 
 
-    public void cancelBooking(String bookingId) {
+    public void cancelBooking(int bookingId) {
         Booking bookingToCancel = null;
 
         for (Booking b : bookings) {

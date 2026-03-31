@@ -13,8 +13,8 @@ public class main {
         bookingManager = new BookingManager(waitlistManager);
         eventManagement = new EventManagement();
         userFunctions = new UserFunctions();
-        scanner = new Scanner(System.in);
-        MainManager manager  = new MainManager();
+        Scanner scanner = new Scanner(System.in);
+        MainManager manager  = new MainManager(userFunctions, eventManagement, scanner, bookingManager, waitlistManager);
         UserFunctions userFunctions = new UserFunctions();
         FileManager.loadUsers(userFunctions);
         FileManager.loadEvents(eventManagement);
@@ -80,7 +80,7 @@ public class main {
                                 manager.createEvent();
                                 break;
                             case 2:
-                                manager.updateEvent();
+                                //manager.updateEvent();
                                 break;
                             case 3:
                                 manager.cancelEvent();
