@@ -7,12 +7,15 @@ public class main {
     private static BookingManager bookingManager;
     private static UserFunctions userFunctions;
     private static WaitlistManager waitlistManager;
+
     public static void main(String[] args){
         waitlistManager = new WaitlistManager();
         bookingManager = new BookingManager(waitlistManager);
         eventManagement = new EventManagement();
         userFunctions = new UserFunctions();
         scanner = new Scanner(System.in);
+        MainManager manager  = new MainManager();
+        UserFunctions userFunctions = new UserFunctions();
         FileManager.loadUsers(userFunctions);
         FileManager.loadEvents(eventManagement);
         FileManager.loadBookings(bookingManager, userFunctions, eventManagement);
@@ -42,13 +45,13 @@ public class main {
                         choice = Integer.parseInt(scanner.nextLine());
                         switch(choice){
                             case 1:
-                                MainManager.addUser();
+                                manager.addUser();
                                 break;
                             case 2:
-                                MainManager.viewUser();
+                                manager.viewUser();
                                 break;
                             case 3:
-                                MainManager.listAllUsers();
+                                userFunctions.listAllUsers();
                                 break;
                             case 4:
                                 back = true;
@@ -74,19 +77,19 @@ public class main {
 
                         switch(choice){
                             case 1:
-                                MainManager.createEvent();
+                                manager.createEvent();
                                 break;
                             case 2:
-                                MainManager.updateEvent();
+                                manager.updateEvent();
                                 break;
                             case 3:
-                                MainManager.cancelEvent();
+                                manager.cancelEvent();
                                 break;
                             case 4:
-                                MainManager.listEvent();
+                                manager.listEvent();
                                 break;
                             case 5:
-                                MainManager.searchEvent();
+                                manager.searchEvent();
                                 break;
                             case 6:
                                 back = true;
@@ -111,16 +114,16 @@ public class main {
                         choice = Integer.parseInt(scanner.nextLine());
                         switch (choice) {
                             case 1:
-                                MainManager.createBooking();
+                                manager.createBooking();
                                 break;
                             case 2:
-                                MainManager.cancelBooking();
+                                manager.cancelBooking();
                                 break;
                             case 3:
-                                MainManager.viewUserBookings();
+                                manager.viewUserBookings();
                                 break;
                             case 4:
-                                MainManager.listAllBookings();
+                                manager.listAllBookings();
                                 break;
                             case 5:
                                 back = true;
@@ -140,7 +143,7 @@ public class main {
                         choice = Integer.parseInt(scanner.nextLine());
                         switch(choice){
                             case 1:
-                                MainManager.viewWailtList();
+                                manager.viewWaitList();
                                 break;
                             case 2:
                                 back = true;
