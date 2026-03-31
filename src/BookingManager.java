@@ -1,14 +1,13 @@
+
 import java.util.ArrayList;
 
 public class BookingManager {
     private ArrayList<Booking> bookings;
     private WaitlistManager waitlistManager;
-    private int bookingCounter;
 
     public BookingManager(WaitlistManager waitlistManager) {
         this.bookings = new ArrayList<>();
         this.waitlistManager = waitlistManager;
-        this.bookingCounter = 1;
     }
 
     public void createBooking(User user, Event event) {
@@ -29,29 +28,29 @@ public class BookingManager {
             return;
         }
 
+
+        Booking booking = new Booking(user, event);
+
         int confirmedCount = getConfirmedBookingCount(event);
         if (confirmedCount >= event.getCapacity()) {
             System.out.println("Event is full. Adding to waitlist...");
+            booking.setStatus("Waitlisted");
             waitlistManager.addToWaitlist(event.getEventId(), user);
-
-            String bookingId = "B" + String.format("%03d", bookingCounter++);
-            Booking booking = new Booking(user, event);
-            bookings.add(booking);
-            return;
+        } else {
+            booking.setStatus("Confirmed");
         }
 
-        String bookingId = "B" + String.format("%03d", bookingCounter++);
-        Booking booking = new Booking(user, event);
         bookings.add(booking);
-        System.out.println("Success: Booking " + bookingId + " confirmed for '" + user.getname() +
-                         "' at event '" + event.getTitle() + "'.");
+        System.out.println("Success: Booking " + booking.getBookingId() + " (" + booking.getStatus() +
+                ") confirmed for '" + user.getname() + "' at event '" + event.getTitle() + "'.");
     }
 
-    public void cancelBooking(int bookingId) {
+
+    public void cancelBooking(String bookingId) {
         Booking bookingToCancel = null;
 
         for (Booking b : bookings) {
-            if (b.getBookingId() == (bookingId)) {
+            if (b.getBookingId().equals(bookingId)) {
                 bookingToCancel = b;
                 break;
             }
@@ -62,33 +61,47 @@ public class BookingManager {
             return;
         }
 
+        if (bookingToCancel.getStatus().equals("Cancelled")) {
+            System.out.println("Error: Booking is already cancelled.");
+            return;
+        }
+
         Event event = bookingToCancel.getEvent();
         String previousStatus = bookingToCancel.getStatus();
 
-        bookings.remove(bookingToCancel);
+        bookingToCancel.setStatus("Cancelled");
         System.out.println("Booking " + bookingId + " cancelled.");
+
 
         if (previousStatus.equals("Confirmed") && waitlistManager.hasWaitlist(event.getEventId())) {
             User promotedUser = waitlistManager.promoteFirstFromWaitlist(event.getEventId());
             if (promotedUser != null) {
                 for (Booking b : bookings) {
                     if (b.getUser().getUserID().equals(promotedUser.getUserID())
-                        && b.getEvent().getEventId().equals(event.getEventId())
-                        && b.getStatus().equals("Waitlisted")) {
+                            && b.getEvent().getEventId().equals(event.getEventId())
+                            && b.getStatus().equals("Waitlisted")) {
+
                         b.setStatus("Confirmed");
                         System.out.println("User '" + promotedUser.getname() +
-                                         "' promoted from waitlist to confirmed!");
+                                "' promoted from waitlist to confirmed!");
                         break;
                     }
                 }
             }
         }
+
+        else if (previousStatus.equals("Waitlisted")) {
+            waitlistManager.removeFromWaitlist(event.getEventId(), bookingToCancel.getUser().getUserID());
+            System.out.println("User removed from waitlist.");
+        }
     }
 
     private boolean hasUserBookedEvent(User user, Event event) {
         for (Booking b : bookings) {
+
             if (b.getUser().getUserID().equals(user.getUserID())
-                && b.getEvent().getEventId().equals(event.getEventId())) {
+                    && b.getEvent().getEventId().equals(event.getEventId())
+                    && !b.getStatus().equals("Cancelled")) {
                 return true;
             }
         }
@@ -99,7 +112,7 @@ public class BookingManager {
         int count = 0;
         for (Booking b : bookings) {
             if (b.getUser().getUserID().equals(user.getUserID())
-                && b.getStatus().equals("Confirmed")) {
+                    && b.getStatus().equals("Confirmed")) {
                 count++;
             }
         }
@@ -110,7 +123,7 @@ public class BookingManager {
         int count = 0;
         for (Booking b : bookings) {
             if (b.getEvent().getEventId().equals(event.getEventId())
-                && b.getStatus().equals("Confirmed")) {
+                    && b.getStatus().equals("Confirmed")) {
                 count++;
             }
         }
@@ -121,6 +134,10 @@ public class BookingManager {
         return bookings;
     }
 
+    public void addLoadedBooking(Booking booking) {
+        bookings.add(booking);
+    }
+
     public void listAllBookings() {
         if (bookings.isEmpty()) {
             System.out.println("No bookings found.");
@@ -129,9 +146,9 @@ public class BookingManager {
         System.out.println("--- All Bookings ---");
         for (Booking b : bookings) {
             System.out.println("ID: " + b.getBookingId() +
-                             "  User: " + b.getUser().getname() +
-                             "  Event: " + b.getEvent().getTitle() +
-                             "  Status: " + b.getStatus());
+                    "  User: " + b.getUser().getname() +
+                    "  Event: " + b.getEvent().getTitle() +
+                    "  Status: " + b.getStatus());
         }
     }
 
@@ -141,8 +158,8 @@ public class BookingManager {
         for (Booking b : bookings) {
             if (b.getUser().getUserID().equals(user.getUserID())) {
                 System.out.println("ID: " + b.getBookingId() +
-                                 "  Event: " + b.getEvent().getTitle() +
-                                 "  Status: " + b.getStatus());
+                        "  Event: " + b.getEvent().getTitle() +
+                        "  Status: " + b.getStatus());
                 found = true;
             }
         }
