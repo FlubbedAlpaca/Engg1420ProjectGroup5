@@ -88,13 +88,4 @@ public class Booking {
             bookingStatus = status;
         }
     }
-
-    public String getUserName() {
-        return user.getname();
-    }
-
-    public String getEventTitle() {
-        return event.getTitle();
-    }
-
 }
