@@ -7,6 +7,13 @@ public class MainManager {
     private static Scanner scanner;
     private static BookingManager bookingManager;
     private static WaitlistManager waitlistManager;
+    public MainManager(UserFunctions userFunctions, EventManagement eventManagement, Scanner scanner, BookingManager bookingManager, WaitlistManager waitlistManager) {
+        this.userFunctions = userFunctions;
+        this.eventManagement = eventManagement;
+        this.scanner = scanner;
+        this.bookingManager = bookingManager;
+        this.waitlistManager = waitlistManager;
+    }
 
     void addUser(){
         System.out.print("Enter User ID: ");
@@ -66,29 +73,12 @@ public class MainManager {
                 break;
             case "Concert":
                 System.out.print("Enter Age Restriction: ");
-                String ageRestriction = scanner.nextLine();
-                event = new Concert(eventId, title, dateTime, location, capacity, ageRestriction);
-                eventManagement.createEvent(event);
-                break;
-            default:
                 System.out.println("Invalid event type.");
         }
     }
 
-    void updateEvent(){
-        System.out.print("Enter Event ID to update: ");
-        String eventId = scanner.nextLine();
-
-        System.out.print("Enter the new Title: ");
-        String newTitle = scanner.nextLine();
-
-        System.out.print("Enter the new Date/Time: ");
-        String newDateTime = scanner.nextLine();
-
-        System.out.print("Enter the new Location: ");
-        String newLocation = scanner.nextLine();
-
-        System.out.println("Enter the new capacity: ");
+    // Broken, need to add prompt to get event
+    /*void updateEvent(){
         int newCapacity = Integer.parseInt(scanner.nextLine());
 
         Event event = eventManagement.getEvent(eventId);
@@ -112,7 +102,7 @@ public class MainManager {
             return;
         }
         eventManagement.updateEvent(eventId, newTitle, newDateTime, newLocation, newCapacity, specificField);
-    }
+    }*/
 
     void cancelEvent(){
         System.out.print("Enter Event ID to cancel: ");
