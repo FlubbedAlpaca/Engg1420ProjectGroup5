@@ -102,32 +102,46 @@ public class EventManagement {
     }
 
 
+    public ArrayList<Event> searchEvents(String titleQuery, String eventType) {
+        ArrayList<Event> matches = new ArrayList<>();
+        String lowerQuery = (titleQuery == null) ? "" : titleQuery.toLowerCase().trim();
+
+        for (Event e : events) {
+            boolean titleMatches = e.getTitle().toLowerCase().contains(lowerQuery);
+
+            boolean typeMatches;
+            if (eventType == null || eventType.trim().isEmpty() || eventType.equalsIgnoreCase("All")) {
+                typeMatches = true;
+            } else if (eventType.equalsIgnoreCase("Workshop")) {
+                typeMatches = e instanceof Workshop;
+            } else if (eventType.equalsIgnoreCase("Seminar")) {
+                typeMatches = e instanceof Seminar;
+            } else if (eventType.equalsIgnoreCase("Concert")) {
+                typeMatches = e instanceof Concert;
+            } else {
+
+                typeMatches = false;
+            }
+
+            if (titleMatches && typeMatches) {
+                matches.add(e);
+            }
+        }
+
+        return matches;
+    }
+
     public void searchAndFilterEvents(String titleQuery, String eventType) {
         System.out.println("--- Search Results ---");
 
+        ArrayList<Event> results = searchEvents(titleQuery, eventType);
+        if (results.isEmpty()) {
+            System.out.println("No matching events found.");
+            return;
+        }
 
-        String lowerQuery = (titleQuery != null) ? titleQuery.toLowerCase() : "";
-
-        for (Event e : events) {
-
-            boolean titleMatches = e.getTitle().toLowerCase().contains(lowerQuery);
-
-
-            boolean typeMatches = false;
-            if (eventType == null || eventType.isEmpty() || eventType.equalsIgnoreCase("All")) {
-                typeMatches = true; // No filter applied
-            } else if (eventType.equalsIgnoreCase("Workshop") && e instanceof Workshop) {
-                typeMatches = true;
-            } else if (eventType.equalsIgnoreCase("Seminar") && e instanceof Seminar) {
-                typeMatches = true;
-            } else if (eventType.equalsIgnoreCase("Concert") && e instanceof Concert) {
-                typeMatches = true;
-            }
-
-
-            if (titleMatches && typeMatches) {
-                System.out.println("Found: [" + e.getEventId() + "] " + e.getTitle() + " (" + e.getClass().getSimpleName() + ")");
-            }
+        for (Event e : results) {
+            System.out.println("Found: [" + e.getEventId() + "] " + e.getTitle() + " (" + e.getClass().getSimpleName() + ")");
         }
     }
 }
