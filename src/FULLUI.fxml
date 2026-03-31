@@ -11,138 +11,150 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="MainController"
-            prefWidth="1100"
-            prefHeight="700">
+            prefWidth="1260"
+            prefHeight="780"
+            style="-fx-background-color: #f3f4f6;">
 
     <left>
-        <VBox spacing="10" prefWidth="180" style="-fx-background-color: #20242b;">
+        <VBox spacing="12" prefWidth="230" style="-fx-background-color: #334155;">
             <padding>
-                <Insets top="20" right="15" bottom="20" left="15"/>
+                <Insets top="20" right="16" bottom="20" left="16"/>
             </padding>
 
-            <Label text="Campus Event System"
-                   style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+            <Label text="Campus Event Booking"
+                   style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;"/>
+            <Label text="Admin Dashboard"
+                   style="-fx-text-fill: #e2e8f0; -fx-font-size: 12px;"/>
 
             <Button text="Users" onAction="#showUsers" maxWidth="Infinity"/>
             <Button text="Events" onAction="#showEvents" maxWidth="Infinity"/>
             <Button text="Bookings" onAction="#showBookings" maxWidth="Infinity"/>
             <Button text="Waitlist" onAction="#showWaitlist" maxWidth="Infinity"/>
-            <Button text="Save Data" onAction="#handleSave" maxWidth="Infinity"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <Button text="Save Data" onAction="#handleSave" maxWidth="Infinity"
+                    style="-fx-font-weight: bold;"/>
         </VBox>
     </left>
 
     <center>
-        <VBox spacing="15" style="-fx-background-color: #f4f6f8;">
+        <VBox spacing="14" style="-fx-background-color: #ffffff; -fx-background-radius: 10; -fx-border-color: #d1d5db; -fx-border-radius: 10;">
             <padding>
-                <Insets top="15" right="15" bottom="15" left="15"/>
+                <Insets top="16" right="16" bottom="12" left="16"/>
             </padding>
 
+            <HBox spacing="10" style="-fx-background-color: #e2e8f0; -fx-background-radius: 8; -fx-padding: 10 12;">
+                <Label text="Campus Event Booking System" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="Welcome, Admin" style="-fx-text-fill: #475569;"/>
+            </HBox>
 
             <VBox fx:id="panelUsers" spacing="12" visible="false" managed="false">
-                <Label text="User Management" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+                <Label text="User Management" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
 
                 <HBox spacing="10">
-                    <TextField fx:id="txtUserId" promptText="User ID"/>
-                    <TextField fx:id="txtUserName" promptText="Name"/>
-                    <TextField fx:id="txtUserEmail" promptText="Email"/>
-                    <ComboBox fx:id="cmbUserType" promptText="User Type" prefWidth="140"/>
+                    <TextField fx:id="txtUserId" promptText="User ID" prefWidth="150"/>
+                    <TextField fx:id="txtUserName" promptText="Name" prefWidth="200"/>
+                    <TextField fx:id="txtUserEmail" promptText="Email" prefWidth="240"/>
+                    <ComboBox fx:id="cmbUserType" promptText="User Type" prefWidth="150"/>
                     <Button text="Add User" onAction="#handleAddUser"/>
                 </HBox>
 
-                <TableView fx:id="tblUsers" prefHeight="500">
+                <TableView fx:id="tblUsers" prefHeight="560" style="-fx-background-radius: 6;">
                     <columns>
-                        <TableColumn fx:id="colUserId" text="User ID" prefWidth="120"/>
-                        <TableColumn fx:id="colUserName" text="Name" prefWidth="220"/>
-                        <TableColumn fx:id="colUserEmail" text="Email" prefWidth="260"/>
-                        <TableColumn fx:id="colUserType" text="Type" prefWidth="120"/>
+                        <TableColumn fx:id="colUserId" text="User ID" prefWidth="140"/>
+                        <TableColumn fx:id="colUserName" text="Name" prefWidth="240"/>
+                        <TableColumn fx:id="colUserEmail" text="Email" prefWidth="280"/>
+                        <TableColumn fx:id="colUserType" text="Type" prefWidth="140"/>
                     </columns>
                 </TableView>
             </VBox>
 
             <VBox fx:id="panelEvents" spacing="12" visible="false" managed="false">
-                <Label text="Event Management" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+                <Label text="Event Management" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
 
                 <HBox spacing="10">
-                    <TextField fx:id="txtEventId" promptText="Event ID"/>
-                    <TextField fx:id="txtEventTitle" promptText="Title"/>
-                    <TextField fx:id="txtEventDate" promptText="Date/Time"/>
-                    <TextField fx:id="txtEventLocation" promptText="Location"/>
+                    <TextField fx:id="txtEventId" promptText="Event ID" prefWidth="120"/>
+                    <TextField fx:id="txtEventTitle" promptText="Title" prefWidth="220"/>
+                    <TextField fx:id="txtEventDate" promptText="Date/Time (YYYY-MM-DDTHH:MM)" prefWidth="220"/>
+                    <TextField fx:id="txtEventLocation" promptText="Location" prefWidth="180"/>
                 </HBox>
 
                 <HBox spacing="10">
-                    <TextField fx:id="txtEventCapacity" promptText="Capacity"/>
-                    <ComboBox fx:id="cmbEventType" promptText="Event Type" prefWidth="140"/>
-                    <TextField fx:id="txtEventSpecific" promptText="Topic / Speaker / Age Restriction"/>
+                    <TextField fx:id="txtEventCapacity" promptText="Capacity" prefWidth="110"/>
+                    <ComboBox fx:id="cmbEventType" promptText="Event Type" prefWidth="170"/>
+                    <TextField fx:id="txtEventSpecific" promptText="Topic / Speaker / Age Restriction" prefWidth="280"/>
                     <Button text="Create Event" onAction="#handleCreateEvent"/>
-                    <Button text="Cancel Selected Event" onAction="#handleCancelEvent"/>
+                    <Button text="Cancel Selected" onAction="#handleCancelEvent"/>
                 </HBox>
 
                 <HBox spacing="10">
-                    <TextField fx:id="txtSearchTitle" promptText="Search by title"/>
-                    <ComboBox fx:id="cmbFilterType" promptText="Filter Type" prefWidth="140"/>
+                    <TextField fx:id="txtSearchTitle" promptText="Search by title" prefWidth="320"/>
+                    <ComboBox fx:id="cmbFilterType" promptText="Filter Type" prefWidth="160"/>
                     <Button text="Search" onAction="#handleSearchEvents"/>
                     <Button text="Clear" onAction="#handleClearSearch"/>
                 </HBox>
 
-                <TableView fx:id="tblEvents" prefHeight="420">
+                <TableView fx:id="tblEvents" prefHeight="500" style="-fx-background-radius: 6;">
                     <columns>
-                        <TableColumn fx:id="colEventId" text="Event ID" prefWidth="90"/>
-                        <TableColumn fx:id="colEventTitle" text="Title" prefWidth="180"/>
-                        <TableColumn fx:id="colEventDate" text="Date/Time" prefWidth="160"/>
-                        <TableColumn fx:id="colEventLocation" text="Location" prefWidth="140"/>
+                        <TableColumn fx:id="colEventId" text="Event ID" prefWidth="95"/>
+                        <TableColumn fx:id="colEventTitle" text="Title" prefWidth="220"/>
+                        <TableColumn fx:id="colEventDate" text="Date/Time" prefWidth="180"/>
+                        <TableColumn fx:id="colEventLocation" text="Location" prefWidth="160"/>
                         <TableColumn fx:id="colEventCapacity" text="Capacity" prefWidth="90"/>
-                        <TableColumn fx:id="colEventStatus" text="Status" prefWidth="100"/>
-                        <TableColumn fx:id="colEventType" text="Type" prefWidth="110"/>
+                        <TableColumn fx:id="colEventStatus" text="Status" prefWidth="120"/>
+                        <TableColumn fx:id="colEventType" text="Type" prefWidth="120"/>
                     </columns>
                 </TableView>
             </VBox>
-            <!-- BOOKING PANEL -->
+
             <VBox fx:id="panelBookings" spacing="12" visible="false" managed="false">
-                <Label text="Booking Management" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+                <Label text="Booking Management" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
 
                 <HBox spacing="10">
-                    <TextField fx:id="txtBookingUserId" promptText="User ID"/>
-                    <TextField fx:id="txtBookingEventId" promptText="Event ID"/>
+                    <TextField fx:id="txtBookingUserId" promptText="User ID" prefWidth="170"/>
+                    <TextField fx:id="txtBookingEventId" promptText="Event ID" prefWidth="170"/>
                     <Button text="Create Booking" onAction="#handleCreateBooking"/>
-                </HBox>
-
-                <HBox spacing="10">
-                    <TextField fx:id="txtCancelBookingId" promptText="Booking ID to Cancel"/>
+                    <TextField fx:id="txtCancelBookingId" promptText="Booking ID to Cancel" prefWidth="200"/>
                     <Button text="Cancel Booking" onAction="#handleCancelBooking"/>
                 </HBox>
 
-                <TableView fx:id="tblBookings" prefHeight="500">
+                <TableView fx:id="tblBookings" prefHeight="560" style="-fx-background-radius: 6;">
                     <columns>
-                        <TableColumn fx:id="colBookingId" text="Booking ID" prefWidth="100"/>
-                        <TableColumn fx:id="colBookingUser" text="User" prefWidth="180"/>
-                        <TableColumn fx:id="colBookingEvent" text="Event" prefWidth="220"/>
-                        <TableColumn fx:id="colBookingStatus" text="Status" prefWidth="120"/>
+                        <TableColumn fx:id="colBookingId" text="Booking ID" prefWidth="180"/>
+                        <TableColumn fx:id="colBookingUser" text="User" prefWidth="220"/>
+                        <TableColumn fx:id="colBookingEvent" text="Event" prefWidth="320"/>
+                        <TableColumn fx:id="colBookingStatus" text="Status" prefWidth="170"/>
                     </columns>
                 </TableView>
             </VBox>
 
-            <!-- WAITLIST PANEL -->
             <VBox fx:id="panelWaitlist" spacing="12" visible="false" managed="false">
-                <Label text="Waitlist Management" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+                <Label text="Waitlist Management" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
 
                 <HBox spacing="10">
-                    <TextField fx:id="txtWaitlistEventId" promptText="Event ID"/>
+                    <TextField fx:id="txtWaitlistEventId" promptText="Event ID" prefWidth="180"/>
                     <Button text="View Waitlist" onAction="#handleViewWaitlist"/>
                 </HBox>
 
-                <ListView fx:id="lstWaitlist" prefHeight="520"/>
+                <ListView fx:id="lstWaitlist" prefHeight="580" style="-fx-background-radius: 6;"/>
             </VBox>
 
-            <HBox spacing="10">
-                <Label text="Status:" style="-fx-font-weight: bold;"/>
-                <Label fx:id="lblStatus" text="Ready"/>
-                <HBox HBox.hgrow="ALWAYS"/>
-            </HBox>
         </VBox>
     </center>
+
+    <bottom>
+        <HBox spacing="8" style="-fx-background-color: #e5e7eb; -fx-padding: 8 12; -fx-border-color: #d1d5db 0 0 0;">
+            <Label text="Status:" style="-fx-font-weight: bold; -fx-text-fill: #334155;"/>
+            <Label fx:id="lblStatus" text="Ready" style="-fx-text-fill: #1f2937;"/>
+        </HBox>
+    </bottom>
 </BorderPane>
+

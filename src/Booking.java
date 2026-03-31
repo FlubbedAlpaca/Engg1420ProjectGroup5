@@ -89,12 +89,5 @@ public class Booking {
         }
     }
 
-    public String getUserName() {
-        return user.getname();
-    }
-
-    public String getEventTitle() {
-        return event.getTitle();
-    }
 
 }
