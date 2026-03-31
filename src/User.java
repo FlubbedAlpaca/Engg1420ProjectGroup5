@@ -12,10 +12,21 @@ public abstract class User {
         public String getname(){
             return name;
         }
+
+
+        public String getName(){
+            return name;
+        }
+
         public String getUserID(){
             return userID;
         }
         public String getemail(){
+            return email;
+        }
+
+
+        public String getEmail(){
             return email;
         }
 
@@ -30,7 +41,7 @@ public abstract class User {
         }
 
         public void setEmail(String email){
-            if(name == null){
+            if(email == null){
                 System.out.println("Email Required");
             }else{
                 this.email = email;

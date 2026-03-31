@@ -1,14 +1,26 @@
-import java.util.ArrayList;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import java.util.Scanner;
 
-public class main {
+public class main extends Application {
     private static Scanner scanner;
     private static EventManagement eventManagement;
     private static BookingManager bookingManager;
     private static UserFunctions userFunctions;
     private static WaitlistManager waitlistManager;
 
-    public static void main(String[] args){
+    @Override
+    public void start(Stage stage) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FULLUI.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setTitle("Campus Event Booking System");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    private static void runConsole(){
         waitlistManager = new WaitlistManager();
         bookingManager = new BookingManager(waitlistManager);
         eventManagement = new EventManagement();
@@ -19,6 +31,7 @@ public class main {
         FileManager.loadUsers(userFunctions);
         FileManager.loadEvents(eventManagement);
         FileManager.loadBookings(bookingManager, userFunctions, eventManagement);
+
         boolean finished = false;
 
         System.out.println("Campus Event System");
@@ -166,5 +179,13 @@ public class main {
             }
 
         }
+    }
+
+    public static void main(String[] args){
+        if (args.length > 0 && args[0].equalsIgnoreCase("cli")) {
+            runConsole();
+            return;
+        }
+        launch(args);
     }
 }

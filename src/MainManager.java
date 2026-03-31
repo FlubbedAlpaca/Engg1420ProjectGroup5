@@ -144,7 +144,7 @@ public class MainManager {
     }
     void cancelBooking(){
         System.out.println("Enter Booking ID to cancel: ");
-        int bookingId = Integer.parseInt(scanner.nextLine());
+        String bookingId = scanner.nextLine().trim();
         bookingManager.cancelBooking(bookingId);
     }
     void viewUserBookings(){

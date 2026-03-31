@@ -46,7 +46,7 @@ public class MainController {
     @FXML private ComboBox<String> cmbFilterType;
 
     @FXML private TableView<Booking> tblBookings;
-    @FXML private TableColumn<Booking, Integer> colBookingId;
+    @FXML private TableColumn<Booking, String> colBookingId;
     @FXML private TableColumn<Booking, String> colBookingUser;
     @FXML private TableColumn<Booking, String> colBookingEvent;
     @FXML private TableColumn<Booking, String> colBookingStatus;
@@ -222,14 +222,9 @@ public class MainController {
     public void handleCancelBooking() {
         String idStr = txtCancelBookingId.getText().trim();
         if (idStr.isEmpty()) { setStatus("Enter a Booking ID to cancel."); return; }
-        try {
-            int id = Integer.parseInt(idStr);
-            bookingManager.cancelBooking(id);
-            refreshBookingTable();
-            setStatus("Booking #" + id + " cancelled. Waitlist updated if applicable.");
-        } catch (NumberFormatException e) {
-            setStatus("Booking ID must be a number.");
-        }
+        bookingManager.cancelBooking(idStr);
+        refreshBookingTable();
+        setStatus("Booking " + idStr + " cancelled. Waitlist updated if applicable.");
     }
 
     @FXML
