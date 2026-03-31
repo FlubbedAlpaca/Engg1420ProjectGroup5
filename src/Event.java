@@ -63,5 +63,8 @@ public class Event {
         this.title = title;
     }
 
+    public String getEventType() {
+        return this.getClass().getSimpleName();
+    }
 
 }
