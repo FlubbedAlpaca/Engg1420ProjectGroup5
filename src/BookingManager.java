@@ -46,11 +46,11 @@ public class BookingManager {
     }
 
 
-    public void cancelBooking(int bookingId) {
+    public void cancelBooking(String bookingId) {
         Booking bookingToCancel = null;
 
         for (Booking b : bookings) {
-            if (b.getBookingId().equals(bookingId)) {
+            if (b.getBookingId().equalsIgnoreCase(bookingId)) {
                 bookingToCancel = b;
                 break;
             }

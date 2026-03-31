@@ -105,12 +105,13 @@
                 <TableView fx:id="tblEvents" prefHeight="500" style="-fx-background-radius: 6;">
                     <columns>
                         <TableColumn fx:id="colEventId" text="Event ID" prefWidth="95"/>
-                        <TableColumn fx:id="colEventTitle" text="Title" prefWidth="220"/>
+                        <TableColumn fx:id="colEventTitle" text="Title" prefWidth="190"/>
                         <TableColumn fx:id="colEventDate" text="Date/Time" prefWidth="180"/>
                         <TableColumn fx:id="colEventLocation" text="Location" prefWidth="160"/>
                         <TableColumn fx:id="colEventCapacity" text="Capacity" prefWidth="90"/>
                         <TableColumn fx:id="colEventStatus" text="Status" prefWidth="120"/>
                         <TableColumn fx:id="colEventType" text="Type" prefWidth="120"/>
+                        <TableColumn fx:id="colEventSpecific" text="Topic/Speaker/Age" prefWidth="170"/>
                     </columns>
                 </TableView>
             </VBox>

@@ -13,4 +13,9 @@ public class Workshop extends Event {
     public void setTopic(String topic) {
         this.topic = topic;
     }
+
+    @Override
+    public String getSpecificInfo() {
+        return topic;
+    }
 }

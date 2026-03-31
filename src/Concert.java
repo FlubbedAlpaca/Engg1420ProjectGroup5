@@ -13,4 +13,9 @@ public class Concert extends Event {
     public void setAgeRestriction(String AgeRestriction) {
         this.AgeRestriction = AgeRestriction;
     }
+
+    @Override
+    public String getSpecificInfo() {
+        return AgeRestriction;
+    }
 }

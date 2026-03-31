@@ -13,4 +13,9 @@ public class Seminar extends Event {
     public void setSpeakerName(String SpeakerName) {
         this.SpeakerName = SpeakerName;
     }
+
+    @Override
+    public String getSpecificInfo() {
+        return SpeakerName;
+    }
 }
