@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 
 public class WaitlistManager {
@@ -9,7 +10,7 @@ public class WaitlistManager {
         this.allWaitlists = new ArrayList<ArrayList<User>>();
     }
 
-    // Add a user to the waitlist for an event
+    // Add user to waitlist
     public void addToWaitlist(String eventId, User user) {
         int index = eventIDlist.indexOf(eventId);
 
@@ -44,6 +45,21 @@ public class WaitlistManager {
             return null;
         }
         return waitlist.remove(0);
+    }
+
+    // Remove specific person from waitlist
+    public void removeFromWaitlist(String eventId, String userId) {
+        int index = eventIDlist.indexOf(eventId);
+
+        if (index != -1) {
+            ArrayList<User> waitlist = allWaitlists.get(index);
+            for (int i = 0; i < waitlist.size(); i++) {
+                if (waitlist.get(i).getUserID().equals(userId)) {
+                    waitlist.remove(i);
+                    break;
+                }
+            }
+        }
     }
 
     public void clearWaitlist(String eventId) {

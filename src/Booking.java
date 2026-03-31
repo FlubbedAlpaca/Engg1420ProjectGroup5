@@ -1,52 +1,80 @@
+
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
 public class Booking {
     private String bookingStatus;
-    private int bookingID;
-    private static int numBookings = 0;
+    private String bookingID;
+    private static int numBookings = -1;
     private String createdAt;
     private User user;
     private Event event;
 
-    public Booking(User user, Event event){
-        if (event.getCapacity() >= 1){
-            bookingStatus = "Confirmed";
-        } else {
-            bookingStatus = "Waitlisted";
-        }
+    private static final String PREFIX = "ID";
+    private static final DateTimeFormatter ISO_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 
-        bookingID = numBookings + 1;
-        numBookings++;
-
+    //making new booking
+    public Booking(User user, Event event) {
         this.user = user;
         this.event = event;
-        LocalDateTime current_date = LocalDateTime.now();
-        DateTimeFormatter date_format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        createdAt = current_date.format(date_format);
+
+        if (event.getCapacity() >= 1) {
+            this.bookingStatus = "Confirmed";
+        } else {
+            this.bookingStatus = "Waitlisted";
+        }
+
+        numBookings++;
+        this.bookingID = PREFIX + numBookings;
+
+        this.createdAt = LocalDateTime.now().format(ISO_FORMATTER);
     }
 
-    public int getBookingId(){
+    //loading past booking info
+    public Booking(String bookingID, User user, Event event, String createdAt, String status) {
+        this.bookingID = bookingID;
+        this.user = user;
+        this.event = event;
+        this.createdAt = createdAt;
+        this.bookingStatus = status;
+
+        updateCounterFromId(bookingID);
+    }
+
+
+    private void updateCounterFromId(String id) {
+        try {
+            int numericId = Integer.parseInt(id.substring(PREFIX.length()));
+            if (numericId > numBookings) {
+                numBookings = numericId;
+            }
+        } catch (Exception e) {
+            // invalid id
+        }
+    }
+
+
+    public String getBookingId() {
         return bookingID;
     }
 
-    public User getUser(){
+    public User getUser() {
         return user;
     }
 
-    public Event getEvent(){
+    public Event getEvent() {
         return event;
     }
 
-    public String getStatus(){
+    public String getStatus() {
         return bookingStatus;
     }
 
-    public String getCreatedAt(){
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setStatus(String status){
+    public void setStatus(String status) {
         if (status.equals("Confirmed") || status.equals("Waitlisted") || status.equals("Cancelled")) {
             bookingStatus = status;
         }
