@@ -67,4 +67,9 @@ public class Event {
         return this.getClass().getSimpleName();
     }
 
+    // Unified property for UI table binding (topic/speaker/age restriction).
+    public String getSpecificInfo() {
+        return "";
+    }
+
 }

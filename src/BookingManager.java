@@ -50,7 +50,7 @@ public class BookingManager {
         Booking bookingToCancel = null;
 
         for (Booking b : bookings) {
-            if (b.getBookingId().equals(bookingId)) {
+            if (b.getBookingId().equalsIgnoreCase(bookingId)) {
                 bookingToCancel = b;
                 break;
             }

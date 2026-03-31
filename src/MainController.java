@@ -35,6 +35,7 @@ public class MainController {
     @FXML private TableColumn<Event, Integer> colEventCapacity;
     @FXML private TableColumn<Event, String> colEventStatus;
     @FXML private TableColumn<Event, String> colEventType;
+    @FXML private TableColumn<Event, String> colEventSpecific;
     @FXML private TextField txtEventId;
     @FXML private TextField txtEventTitle;
     @FXML private TextField txtEventDate;
@@ -83,7 +84,20 @@ public class MainController {
         colEventCapacity.setCellValueFactory(new PropertyValueFactory<>("capacity"));
         colEventStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         colEventType.setCellValueFactory(new PropertyValueFactory<>("eventType"));
+        colEventSpecific.setCellValueFactory(new PropertyValueFactory<>("specificInfo"));
         tblEvents.setItems(eventObs);
+
+        cmbEventType.valueProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal == null) {
+                txtEventSpecific.setPromptText("Type-specific field");
+            } else if (newVal.equals("Workshop")) {
+                txtEventSpecific.setPromptText("Topic");
+            } else if (newVal.equals("Seminar")) {
+                txtEventSpecific.setPromptText("Speaker Name");
+            } else if (newVal.equals("Concert")) {
+                txtEventSpecific.setPromptText("Age Restriction");
+            }
+        });
 
         colBookingId.setCellValueFactory(new PropertyValueFactory<>("bookingId"));
         colBookingUser.setCellValueFactory(new PropertyValueFactory<>("userName"));
@@ -211,8 +225,10 @@ public class MainController {
         String eventId = txtBookingEventId.getText().trim();
         User  user  = userFunctions.getUser(userId);
         Event event = eventManagement.getEvent(eventId);
-        if (user == null)  { setStatus("User ID not found: " + userId);   return; }
-        if (event == null) { setStatus("Event ID not found: " + eventId); return; }
+        if (user == null)  {
+            setStatus("User ID not found: " + userId);   return; }
+        if (event == null) {
+            setStatus("Event ID not found: " + eventId); return; }
         bookingManager.createBooking(user, event);
         refreshBookingTable();
         setStatus("Booking processed for " + user.getname() + " at " + event.getTitle());
@@ -221,7 +237,8 @@ public class MainController {
     @FXML
     public void handleCancelBooking() {
         String idStr = txtCancelBookingId.getText().trim();
-        if (idStr.isEmpty()) { setStatus("Enter a Booking ID to cancel."); return; }
+        if (idStr.isEmpty()) {
+            setStatus("Enter a Booking ID to cancel."); return; }
         bookingManager.cancelBooking(idStr);
         refreshBookingTable();
         setStatus("Booking " + idStr + " cancelled. Waitlist updated if applicable.");

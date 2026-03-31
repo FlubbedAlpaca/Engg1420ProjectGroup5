@@ -73,6 +73,11 @@ public class MainManager {
                 break;
             case "Concert":
                 System.out.print("Enter Age Restriction: ");
+                String ageRestriction = scanner.nextLine();
+                event = new Concert(eventId, title, dateTime, location, capacity, ageRestriction);
+                eventManagement.createEvent(event);
+                break;
+            default:
                 System.out.println("Invalid event type.");
         }
     }
