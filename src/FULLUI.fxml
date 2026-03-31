@@ -63,3 +63,41 @@
                     </columns>
                 </TableView>
             </VBox>
+
+            <VBox fx:id="panelEvents" spacing="12" visible="false" managed="false">
+                <Label text="Event Management" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+                <HBox spacing="10">
+                    <TextField fx:id="txtEventId" promptText="Event ID"/>
+                    <TextField fx:id="txtEventTitle" promptText="Title"/>
+                    <TextField fx:id="txtEventDate" promptText="Date/Time"/>
+                    <TextField fx:id="txtEventLocation" promptText="Location"/>
+                </HBox>
+
+                <HBox spacing="10">
+                    <TextField fx:id="txtEventCapacity" promptText="Capacity"/>
+                    <ComboBox fx:id="cmbEventType" promptText="Event Type" prefWidth="140"/>
+                    <TextField fx:id="txtEventSpecific" promptText="Topic / Speaker / Age Restriction"/>
+                    <Button text="Create Event" onAction="#handleCreateEvent"/>
+                    <Button text="Cancel Selected Event" onAction="#handleCancelEvent"/>
+                </HBox>
+
+                <HBox spacing="10">
+                    <TextField fx:id="txtSearchTitle" promptText="Search by title"/>
+                    <ComboBox fx:id="cmbFilterType" promptText="Filter Type" prefWidth="140"/>
+                    <Button text="Search" onAction="#handleSearchEvents"/>
+                    <Button text="Clear" onAction="#handleClearSearch"/>
+                </HBox>
+
+                <TableView fx:id="tblEvents" prefHeight="420">
+                    <columns>
+                        <TableColumn fx:id="colEventId" text="Event ID" prefWidth="90"/>
+                        <TableColumn fx:id="colEventTitle" text="Title" prefWidth="180"/>
+                        <TableColumn fx:id="colEventDate" text="Date/Time" prefWidth="160"/>
+                        <TableColumn fx:id="colEventLocation" text="Location" prefWidth="140"/>
+                        <TableColumn fx:id="colEventCapacity" text="Capacity" prefWidth="90"/>
+                        <TableColumn fx:id="colEventStatus" text="Status" prefWidth="100"/>
+                        <TableColumn fx:id="colEventType" text="Type" prefWidth="110"/>
+                    </columns>
+                </TableView>
+            </VBox>
