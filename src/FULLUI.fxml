@@ -35,3 +35,31 @@
             <Button text="Save Data" onAction="#handleSave" maxWidth="Infinity"/>
         </VBox>
     </left>
+
+    <center>
+        <VBox spacing="15" style="-fx-background-color: #f4f6f8;">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+
+
+            <VBox fx:id="panelUsers" spacing="12" visible="false" managed="false">
+                <Label text="User Management" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+                <HBox spacing="10">
+                    <TextField fx:id="txtUserId" promptText="User ID"/>
+                    <TextField fx:id="txtUserName" promptText="Name"/>
+                    <TextField fx:id="txtUserEmail" promptText="Email"/>
+                    <ComboBox fx:id="cmbUserType" promptText="User Type" prefWidth="140"/>
+                    <Button text="Add User" onAction="#handleAddUser"/>
+                </HBox>
+
+                <TableView fx:id="tblUsers" prefHeight="500">
+                    <columns>
+                        <TableColumn fx:id="colUserId" text="User ID" prefWidth="120"/>
+                        <TableColumn fx:id="colUserName" text="Name" prefWidth="220"/>
+                        <TableColumn fx:id="colUserEmail" text="Email" prefWidth="260"/>
+                        <TableColumn fx:id="colUserType" text="Type" prefWidth="120"/>
+                    </columns>
+                </TableView>
+            </VBox>
