@@ -74,6 +74,15 @@ public class Booking {
         return createdAt;
     }
 
+
+    public String getUserName() {
+        return user.getname();
+    }
+
+    public String getEventTitle() {
+        return event.getTitle();
+    }
+
     public void setStatus(String status) {
         if (status.equals("Confirmed") || status.equals("Waitlisted") || status.equals("Cancelled")) {
             bookingStatus = status;
