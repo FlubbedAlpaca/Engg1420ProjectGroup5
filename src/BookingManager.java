@@ -46,7 +46,7 @@ public class BookingManager {
     }
 
 
-    public void cancelBooking(int bookingId) {
+    public void cancelBooking(String bookingId) {
         Booking bookingToCancel = null;
 
         for (Booking b : bookings) {
@@ -96,7 +96,7 @@ public class BookingManager {
         }
     }
 
-    private boolean hasUserBookedEvent(User user, Event event) {
+    public boolean hasUserBookedEvent(User user, Event event) {
         for (Booking b : bookings) {
 
             if (b.getUser().getUserID().equals(user.getUserID())
@@ -108,7 +108,7 @@ public class BookingManager {
         return false;
     }
 
-    private int getActiveBookingCount(User user) {
+    public int getActiveBookingCount(User user) {
         int count = 0;
         for (Booking b : bookings) {
             if (b.getUser().getUserID().equals(user.getUserID())
@@ -119,7 +119,7 @@ public class BookingManager {
         return count;
     }
 
-    private int getConfirmedBookingCount(Event event) {
+    public int getConfirmedBookingCount(Event event) {
         int count = 0;
         for (Booking b : bookings) {
             if (b.getEvent().getEventId().equals(event.getEventId())

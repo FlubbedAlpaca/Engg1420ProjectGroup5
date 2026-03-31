@@ -25,9 +25,9 @@ public class main extends Application {
         bookingManager = new BookingManager(waitlistManager);
         eventManagement = new EventManagement();
         userFunctions = new UserFunctions();
-        Scanner scanner = new Scanner(System.in);
+        scanner = new Scanner(System.in);
         MainManager manager  = new MainManager(userFunctions, eventManagement, scanner, bookingManager, waitlistManager);
-        UserFunctions userFunctions = new UserFunctions();
+        userFunctions = new UserFunctions();
         FileManager.loadUsers(userFunctions);
         FileManager.loadEvents(eventManagement);
         FileManager.loadBookings(bookingManager, userFunctions, eventManagement);
