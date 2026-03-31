@@ -101,3 +101,48 @@
                     </columns>
                 </TableView>
             </VBox>
+            <!-- BOOKING PANEL -->
+            <VBox fx:id="panelBookings" spacing="12" visible="false" managed="false">
+                <Label text="Booking Management" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+                <HBox spacing="10">
+                    <TextField fx:id="txtBookingUserId" promptText="User ID"/>
+                    <TextField fx:id="txtBookingEventId" promptText="Event ID"/>
+                    <Button text="Create Booking" onAction="#handleCreateBooking"/>
+                </HBox>
+
+                <HBox spacing="10">
+                    <TextField fx:id="txtCancelBookingId" promptText="Booking ID to Cancel"/>
+                    <Button text="Cancel Booking" onAction="#handleCancelBooking"/>
+                </HBox>
+
+                <TableView fx:id="tblBookings" prefHeight="500">
+                    <columns>
+                        <TableColumn fx:id="colBookingId" text="Booking ID" prefWidth="100"/>
+                        <TableColumn fx:id="colBookingUser" text="User" prefWidth="180"/>
+                        <TableColumn fx:id="colBookingEvent" text="Event" prefWidth="220"/>
+                        <TableColumn fx:id="colBookingStatus" text="Status" prefWidth="120"/>
+                    </columns>
+                </TableView>
+            </VBox>
+
+            <!-- WAITLIST PANEL -->
+            <VBox fx:id="panelWaitlist" spacing="12" visible="false" managed="false">
+                <Label text="Waitlist Management" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+                <HBox spacing="10">
+                    <TextField fx:id="txtWaitlistEventId" promptText="Event ID"/>
+                    <Button text="View Waitlist" onAction="#handleViewWaitlist"/>
+                </HBox>
+
+                <ListView fx:id="lstWaitlist" prefHeight="520"/>
+            </VBox>
+
+            <HBox spacing="10">
+                <Label text="Status:" style="-fx-font-weight: bold;"/>
+                <Label fx:id="lblStatus" text="Ready"/>
+                <HBox HBox.hgrow="ALWAYS"/>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>
